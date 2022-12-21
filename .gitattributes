@@ -1,0 +1,15 @@
+*.png binary
+*.jpg binary
+*.ico binary
+
+*.wav binary
+*.ogg binary
+*.mp3 binary
+
+*.otf binary
+*.ttf binary
+
+*.blend binary
+*.fbx   binary
+*.bin   binary
+*.glb   binary

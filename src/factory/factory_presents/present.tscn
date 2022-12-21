@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://factory/factory_presents/present.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.25, 0.3, 0.25 )
+
+[node name="Present" type="PathFollow"]
+rotation_mode = 0
+cubic_interp = false
+loop = false
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+mesh = SubResource( 1 )

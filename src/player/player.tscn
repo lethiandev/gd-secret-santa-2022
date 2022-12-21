@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/elf_skin/elf.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/player.gd" type="Script" id=2]
+[ext_resource path="res://effects/shadow_cast/shadow_cast.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/interact_area/interactee_area.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="RayShape" id=2]
+length = 0.5
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="Skin" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.6, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0 )
+shape = SubResource( 2 )
+
+[node name="ShadowCast" parent="." instance=ExtResource( 3 )]
+
+[node name="InteracteeArea" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )

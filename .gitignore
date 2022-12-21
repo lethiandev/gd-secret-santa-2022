@@ -1,0 +1,7 @@
+.vscode
+.import
+
+/build
+*.blend?
+*.kra?
+*.png?

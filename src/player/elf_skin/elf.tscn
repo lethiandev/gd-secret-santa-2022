@@ -1,0 +1,112 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://player/elf_skin/elf.gltf" type="PackedScene" id=1]
+[ext_resource path="res://shaders/face.gdshader" type="Shader" id=2]
+[ext_resource path="res://player/elf_skin/elf_face.png" type="Texture" id=3]
+[ext_resource path="res://shaders/body.gdshader" type="Shader" id=4]
+[ext_resource path="res://player/elf_skin/elf_body.png" type="Texture" id=5]
+[ext_resource path="res://shaders/albedo_curve.tres" type="Texture" id=6]
+[ext_resource path="res://player/elf_skin/elf.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+shader_param/albedo_texture = ExtResource( 5 )
+shader_param/albedo_curve = ExtResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/albedo_texture = ExtResource( 3 )
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "RESET"
+
+[sub_resource type="AnimationNodeStateMachine" id=9]
+states/RESET/node = SubResource( 25 )
+states/RESET/position = Vector2( 572, 62 )
+start_node = "RESET"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "run-loop"
+
+[sub_resource type="AnimationNodeTimeScale" id=24]
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "walk-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=23]
+sync = true
+
+[sub_resource type="AnimationNodeBlendTree" id=16]
+graph_offset = Vector2( 135.504, 72.877 )
+nodes/output/position = Vector2( 1020, 160 )
+nodes/run/node = SubResource( 21 )
+nodes/run/position = Vector2( 360, 220 )
+nodes/speed/node = SubResource( 24 )
+nodes/speed/position = Vector2( 820, 140 )
+nodes/walk/node = SubResource( 20 )
+nodes/walk/position = Vector2( 360, 80 )
+nodes/walk_run_blend/node = SubResource( 23 )
+nodes/walk_run_blend/position = Vector2( 560, 120 )
+node_connections = [ "walk_run_blend", 0, "walk", "walk_run_blend", 1, "run", "speed", 0, "walk_run_blend", "output", 0, "speed" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+advance_condition = "is_walking"
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+advance_condition = "is_standing"
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/idle/node = SubResource( 15 )
+states/idle/position = Vector2( 365, 74 )
+states/walk/node = SubResource( 16 )
+states/walk/position = Vector2( 598, 74 )
+transitions = [ "idle", "walk", SubResource( 17 ), "walk", "idle", SubResource( 18 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+advance_condition = "is_airborne"
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+advance_condition = "is_grounded"
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id=3]
+states/airborn/node = SubResource( 9 )
+states/airborn/position = Vector2( 620, 78 )
+states/locomotion/node = SubResource( 10 )
+states/locomotion/position = Vector2( 403, 78 )
+transitions = [ "locomotion", "airborn", SubResource( 13 ), "airborn", "locomotion", SubResource( 14 ) ]
+start_node = "locomotion"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[node name="Elf" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+
+[node name="Elf" parent="Armature/Skeleton" index="0"]
+material/0 = SubResource( 2 )
+material/1 = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 3 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
+parameters/conditions/is_airborne = false
+parameters/conditions/is_grounded = false
+parameters/airborn/playback = SubResource( 11 )
+parameters/locomotion/playback = SubResource( 12 )
+parameters/locomotion/conditions/is_standing = false
+parameters/locomotion/conditions/is_walking = false
+parameters/locomotion/walk/speed/scale = 1.0
+parameters/locomotion/walk/walk_run_blend/blend_amount = 0

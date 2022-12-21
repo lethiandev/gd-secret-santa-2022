@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://shaders/albedo_curve.tres" type="Texture" id=1]
+[ext_resource path="res://shaders/body.gdshader" type="Shader" id=2]
+[ext_resource path="res://factory/factory_machines/textures/machine_albedo.png" type="Texture" id=3]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/albedo_texture = ExtResource( 3 )
+shader_param/albedo_curve = ExtResource( 1 )

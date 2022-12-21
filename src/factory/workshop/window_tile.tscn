@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://factory/workshop/tile_meshes/window_tile.gltf" type="PackedScene" id=1]
+[ext_resource path="res://shaders/albedo_curve.tres" type="Texture" id=2]
+[ext_resource path="res://shaders/body.gdshader" type="Shader" id=3]
+[ext_resource path="res://factory/workshop/textures/window.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/albedo_texture = ExtResource( 4 )
+shader_param/albedo_curve = ExtResource( 2 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.505289, 0.796609, 0.131354 )
+
+[node name="WindowTile" type="StaticBody"]
+
+[node name="WindowMesh" parent="." instance=ExtResource( 1 )]
+cast_shadow = 0
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06197, -0.0798268 )
+shape = SubResource( 2 )

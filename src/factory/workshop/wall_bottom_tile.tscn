@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shaders/body.gdshader" type="Shader" id=2]
+[ext_resource path="res://shaders/albedo_curve.tres" type="Texture" id=3]
+[ext_resource path="res://factory/workshop/textures/wooden_wall.png" type="Texture" id=4]
+[ext_resource path="res://factory/workshop/tile_meshes/wall_bottom_tile.gltf" type="PackedScene" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/albedo_texture = ExtResource( 4 )
+shader_param/albedo_curve = ExtResource( 3 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 1, 0.1 )
+
+[node name="WallBottomTile" type="StaticBody"]
+
+[node name="WallBottomMesh" parent="." instance=ExtResource( 5 )]
+cast_shadow = 0
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
