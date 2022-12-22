@@ -13,7 +13,7 @@ height = 2.14648
 radius = 0.5
 
 [sub_resource type="CylinderShape" id=11]
-height = 1.6
+height = 2.76501
 radius = 0.8
 
 [sub_resource type="Animation" id=12]
@@ -59,6 +59,7 @@ shape = SubResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0 )
 
 [node name="CollisionShape" parent="InteractArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.577375, 0 )
 shape = SubResource( 11 )
 
 [node name="AlarmLamp" parent="." instance=ExtResource( 3 )]

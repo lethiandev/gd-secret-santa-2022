@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://props/christmas_tree/christmas_tree.tscn" type="PackedScene" id=2]
@@ -16,21 +16,7 @@
 [ext_resource path="res://factory/workshop/window_tile.tscn" type="PackedScene" id=14]
 [ext_resource path="res://factory/workshop/wall_bottom_tile.tscn" type="PackedScene" id=15]
 [ext_resource path="res://factory/workshop/wall_support_tile.tscn" type="PackedScene" id=16]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 8, 2, 8 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_texture = ExtResource( 3 )
-uv1_scale = Vector3( 0.7, 0.7, 0.7 )
-uv1_triplanar = true
-
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 4, 1, 4 )
-
-[sub_resource type="CubeMesh" id=4]
-
-[sub_resource type="BoxShape" id=5]
+[ext_resource path="res://factory/conveyor_belt/frame.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Curve3D" id=6]
 bake_interval = 0.1
@@ -40,12 +26,45 @@ _data = {
 }
 up_vector_enabled = false
 
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 14, 2, 14 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 0.7, 0.7, 0.7 )
+uv1_triplanar = true
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 7, 1, 7 )
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 3, 2, 8 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.5, 1, 4 )
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 10, 2, 6 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 5, 1, 3 )
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 2, 2, 6 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 1, 1, 3 )
+
+[sub_resource type="QuadMesh" id=11]
+size = Vector2( 0.8, 1.2 )
+
 [node name="SandboxStage" type="Node"]
 script = ExtResource( 13 )
 
 [node name="RandomizeCrash" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0278, 0, 5.29373 )
 
 [node name="CameraBoom" type="Spatial" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0 )
@@ -60,213 +79,604 @@ shadow_enabled = true
 shadow_color = Color( 0.541176, 0.541176, 0.541176, 1 )
 shadow_bias = 0.02
 
-[node name="ChristmasTree" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.429991, 0, -0.902833, 0, 1, 0, 0.902833, 0, -0.429991, 1.67208, 1.19209e-07, -1.92899 )
-
-[node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 1 )
-skeleton = NodePath("../..")
-material/0 = SubResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 3 )
-
-[node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.987, 0.369447, 0 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
-mesh = SubResource( 4 )
-skeleton = NodePath("../..")
-material/0 = SubResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-shape = SubResource( 5 )
-
-[node name="StaticBody3" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.626604, -0.4, -1.94634 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
-mesh = SubResource( 4 )
-skeleton = NodePath("../..")
-material/0 = SubResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
-shape = SubResource( 5 )
-
 [node name="ConveyorBeltPath" type="Path" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.52927, 0, 0 )
 curve = SubResource( 6 )
 script = ExtResource( 6 )
 
 [node name="PresentSpawner" parent="ConveyorBeltPath" instance=ExtResource( 7 )]
+spawn_counter = 60
 spawn_target_path = NodePath("..")
 
 [node name="ConveyorBelt" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.324127, 2 )
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.22882, 1.45038, -6.12921 )
 
 [node name="ConveyorBelt2" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( -0.999969, 0, -0.00790627, 0, 1, 0, 0.00790627, 0, -0.999969, 1.23522, 0.324127, 1.27156 )
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.22882, 1.45038, -4.12198 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt2" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00846 )
 
 [node name="ConveyorBelt3" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( 0.0111873, 0, 0.999938, 0, 1, 0, -0.999938, 0, 0.0111873, 1.97893, 0.328839, 0.0230539 )
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1.22882, 1.45038, -2.11058 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt3" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.02038 )
 
 [node name="ConveyorBelt4" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 3.24464, 0.308435, -0.713683 )
+transform = Transform( 1, 0, 1.06581e-14, 3.87799e-15, 0.931456, -0.363853, -9.92759e-15, 0.363853, 0.931456, -1.22882, 1.08928, -0.14801 )
 
 [node name="ConveyorBelt5" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( -1, 9.78293e-08, -1.15018e-07, 0, 0.76173, 0.647894, 1.50996e-07, 0.647894, -0.76173, 3.24464, 0.942823, -2.46355 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22882, 0.722193, 1.7765 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt5" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.00029 )
+
+[node name="Frame2" parent="ConveyorBeltPath/ConveyorBelt5" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.779697 )
 
 [node name="ConveyorBelt6" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( 1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 2.49605, 1.55673, -3.52467 )
-
-[node name="ConveyorBelt8" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( 1.94707e-07, -0.312783, -0.949825, 0, 0.949825, -0.312783, 1, 6.0901e-08, 1.84938e-07, 0.512938, 1.23603, -3.52467 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.482176, 0.722193, 3.03516 )
 
 [node name="ConveyorBelt7" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, -0.655533, 0.830225, -2.76485 )
+transform = Transform( 0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 1.38464, 0.722193, 3.53112 )
+
+[node name="ConveyorBelt8" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( 0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 3.12207, 0.722193, 4.53423 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt8" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.987956 )
+
+[node name="ConveyorBelt9" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.01101, 0.722193, 5.05045 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt9" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.01313 )
+
+[node name="ConveyorBelt10" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, -0.567384, 0.823453, 0, 0.823453, 0.567384, -1, 2.48011e-08, -3.59943e-08, 6.81551, 1.29725, 5.05045 )
+
+[node name="ConveyorBelt11" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.69124, 1.86055, 5.05045 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt11" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 3.55271e-15, 0, 1, 0, 0, 0, 1, 0, 0, -0.98022 )
+
+[node name="Frame2" parent="ConveyorBeltPath/ConveyorBelt11" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 1.06581e-14, 0, 1, 0, 0, 0, 1, -9.53674e-07, 0, 0.727618 )
+
+[node name="ConveyorBelt12" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 2.69284e-08, -1.48575e-07, 0, 0.983969, 0.178339, 1.50996e-07, 0.178339, -0.983969, 9.96609, 1.97584, 4.3389 )
+
+[node name="ConveyorBelt13" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 9.96609, 2.1488, 2.34503 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt13" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -7.10543e-15, 0, 1, 0, 0, 0, 1, -9.53674e-07, 0, -1.00479 )
+
+[node name="ConveyorBelt14" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.22282, 2.1488, 1.08686 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt14" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 0, 0, 1, 0, 0, -0.243295 )
+
+[node name="ConveyorBelt15" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.20871, 2.1488, 1.08686 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt15" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -3.55271e-15, 0, 1, 0, 0, 0, 1, 0, 0, 1.00262 )
+
+[node name="ConveyorBelt16" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, -0.486808, -0.873509, 0, 0.873509, -0.486808, 1, -2.12791e-08, -3.81823e-08, 5.29454, 1.64169, 1.08686 )
+
+[node name="ConveyorBelt17" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.46064, 1.16404, 1.08686 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt17" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -1.06581e-14, 0, 1, 0, 0, 0, 1, 0, 0, -0.978368 )
+
+[node name="Frame2" parent="ConveyorBeltPath/ConveyorBelt17" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -1.06581e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0.749038 )
+
+[node name="ConveyorBelt18" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 2.21229, 1.16404, 0.330723 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt18" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, -1.42109e-14, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0, 1.00659 )
+
+[node name="ConveyorBelt19" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, -9.86678e-08, 1.143e-07, 0, 0.756972, 0.653447, -1.50996e-07, 0.653447, -0.756972, 2.21229, 1.8238, -1.41467 )
+
+[node name="ConveyorBelt20" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.21229, 2.4487, -3.1794 )
+
+[node name="Frame" parent="ConveyorBeltPath/ConveyorBelt20" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, 0, 0, 1, -5.96046e-07, 0, -0.887703 )
+
+[node name="Frame3" parent="ConveyorBeltPath/ConveyorBelt20" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 4.9738e-14, 0, 0.999999, 0, 0, 0, 0.999999, -9.53674e-07, 0, 3.02248 )
+
+[node name="ConveyorBelt21" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.21229, 2.4487, -5.1906 )
+
+[node name="ConveyorBelt22" parent="ConveyorBeltPath" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.20969, 2.4487, -7.20351 )
 
 [node name="Machine" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.233, 0.265522, 1.018 )
+transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, -1.22487, 1.37851, -3.04311 )
+
+[node name="Machine4" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
+transform = Transform( -0.280951, 0, -0.959722, 0, 1, 0, 0.959722, 0, -0.280951, 4.04021, 0.677531, 4.97969 )
+
+[node name="Machine7" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
+transform = Transform( 0.999736, 0, -0.0229839, 0, 1, 0, 0.0229839, 0, 0.999736, 2.22188, 2.30504, -4.1786 )
+
+[node name="Machine6" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
+transform = Transform( -0.0229839, 0, -0.999736, 0, 1, 0, 0.999736, 0, -0.0229839, 8.55036, 1.75548, 5.05888 )
 
 [node name="Machine2" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25, 0.286286, -0.89 )
+transform = Transform( -0.281688, 0, -0.959506, 0, 1, 0, 0.959506, 0, -0.281688, 0.519425, 0.630702, 3.10323 )
+repair_tool = 2
+
+[node name="Machine3" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
+transform = Transform( 0.0237516, 0, 0.999718, 0, 1, 0, -0.999718, 0, 0.0237516, 8.69058, 2.05983, 1.08957 )
+repair_tool = 2
+
+[node name="Machine5" parent="ConveyorBeltPath" instance=ExtResource( 9 )]
+transform = Transform( 0.0237516, 0, 0.999718, 0, 1, 0, -0.999718, 0, 0.0237516, 3.48613, 0.944266, 1.08957 )
 repair_tool = 2
 
 [node name="StationWrench" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1657, 1.36836, 0.172642 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.802, 0.75, -3.9621 )
 
 [node name="StationHammer" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1052, 0, -1.10959 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79762, 0.75, -2.40141 )
+
+[node name="StationWrench2" parent="." instance=ExtResource( 12 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.525449, 0, 3.09361 )
+
+[node name="StationHammer2" parent="." instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.18703, 0, 3.09361 )
 
 [node name="Workshop" type="Spatial" parent="."]
 
+[node name="Floor" type="StaticBody" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop/Floor"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Workshop/Floor"]
+shape = SubResource( 3 )
+
+[node name="StaticBody2" type="StaticBody" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.513, 0.5, 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop/StaticBody2"]
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Workshop/StaticBody2"]
+shape = SubResource( 5 )
+
+[node name="StaticBody5" type="StaticBody" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.81143, -0.5, 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop/StaticBody5"]
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Workshop/StaticBody5"]
+shape = SubResource( 5 )
+
+[node name="StaticBody3" type="StaticBody" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop/StaticBody3"]
+mesh = SubResource( 4 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Workshop/StaticBody3"]
+shape = SubResource( 8 )
+
+[node name="StaticBody4" type="StaticBody" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30963, 0.603843, -5.54857 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop/StaticBody4"]
+mesh = SubResource( 9 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Workshop/StaticBody4"]
+shape = SubResource( 10 )
+
 [node name="WallBottomTile" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7 )
 
 [node name="WallBottomTile2" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7 )
 
 [node name="WallBottomTile3" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
 
 [node name="WallBottomTile4" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7 )
 
 [node name="WallBottomTile5" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 3 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -1 )
 
 [node name="WallBottomTile6" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 1 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -2 )
 
 [node name="WallBottomTile7" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -1 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -4 )
 
 [node name="WallBottomTile8" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -3 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -6 )
 
 [node name="WallBottomTile9" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, -4 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, -7 )
 
 [node name="WallBottomTile10" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0, -4 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -7 )
 
 [node name="WallBottomTile11" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0, -4 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 0, -7 )
 
 [node name="WallBottomTile12" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3, 0, -4 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, 0, -7 )
 
 [node name="WallBottomTile13" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0, -3 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, 0 )
 
 [node name="WallBottomTile14" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0, -1 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, 2 )
 
 [node name="WallBottomTile15" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0, 1 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, 4 )
 
 [node name="WallBottomTile16" parent="Workshop" instance=ExtResource( 15 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0, 3 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, 6 )
 
 [node name="WallTile" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 7 )
+
+[node name="WallBottomTile17" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7 )
+
+[node name="WallTile17" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 7 )
+
+[node name="WallBottomTile18" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7 )
+
+[node name="WallTile18" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 7 )
+
+[node name="WallTile35" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 7 )
+
+[node name="WallTile36" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 7 )
 
 [node name="WallTile2" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7 )
+
+[node name="WallTile37" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 7 )
+
+[node name="WallTile38" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 7 )
 
 [node name="WallTile3" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 7 )
 
 [node name="WallTile4" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 7 )
+
+[node name="WallBottomTile23" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 7 )
+
+[node name="WallTile23" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 7 )
+
+[node name="WallTile54" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 7 )
+
+[node name="WallTile55" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 7 )
+
+[node name="WallTile56" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, 7 )
 
 [node name="WallTile5" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2, 3 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, 6 )
 
 [node name="WallTile6" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2, 1 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, 4 )
 
 [node name="WallTile7" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2, -1 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, 2 )
 
 [node name="WallTile8" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 2, -3 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, 0 )
+
+[node name="WallBottomTile25" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, -2 )
+
+[node name="WallTile25" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, -2 )
+
+[node name="WallBottomTile26" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, -4 )
+
+[node name="WallTile26" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, -4 )
+
+[node name="WallBottomTile27" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, -6 )
+
+[node name="WallTile27" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 2, -6 )
+
+[node name="WallTile47" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, 6 )
+
+[node name="WallTile48" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, 4 )
+
+[node name="WallTile49" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, 2 )
+
+[node name="WallTile50" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, 0 )
+
+[node name="WallTile51" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, -2 )
+
+[node name="WallTile52" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, -4 )
+
+[node name="WallTile53" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 4, -6 )
 
 [node name="WallTile9" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3, 2, -4 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 2, -7 )
+
+[node name="WallBottomTile24" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6, 0, -7 )
+
+[node name="WallTile24" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6, 2, -7 )
 
 [node name="WallTile10" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 2, -4 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 2, -7 )
 
 [node name="WallTile11" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1, 2, -4 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2, -7 )
 
 [node name="WallTile12" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3, 2, -4 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2, 2, -7 )
+
+[node name="WallTile42" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4, 4, -7 )
+
+[node name="WallTile43" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6, 4, -7 )
+
+[node name="WallTile44" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 4, -7 )
+
+[node name="WallTile45" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 4, -7 )
+
+[node name="WallTile46" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2, 4, -7 )
 
 [node name="WallTile13" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4, 2, -3 )
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 2, -6 )
 
 [node name="WallTile14" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4, 2, -1 )
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 2, -4 )
 
 [node name="WallTile15" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4, 2, 1 )
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 2, -2 )
+
+[node name="WallTile39" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 4, -6 )
+
+[node name="WallTile40" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 4, -4 )
+
+[node name="WallTile41" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 3, 4, -2 )
 
 [node name="WallTile16" parent="Workshop" instance=ExtResource( 8 )]
-transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4, 2, 3 )
+transform = Transform( -1, 0, 8.74226e-08, 0, 1, 0, -8.74226e-08, 0, -1, 4, 2, -1 )
+
+[node name="WallBottomTile19" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, -1 )
+
+[node name="WallTile19" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74226e-08, 0, 1, 0, -8.74226e-08, 0, -1, 6, 2, -1 )
+
+[node name="WallTile33" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74226e-08, 0, 1, 0, -8.74226e-08, 0, -1, 4, 4, -1 )
+
+[node name="WallTile34" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, 8.74226e-08, 0, 1, 0, -8.74226e-08, 0, -1, 6, 4, -1 )
+
+[node name="WallBottomTile20" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 2 )
+
+[node name="WallTile20" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 2, 2 )
+
+[node name="WallBottomTile28" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 0 )
+
+[node name="WallTile28" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 2, 0 )
+
+[node name="WallBottomTile21" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 4 )
+
+[node name="WallTile21" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 2, 4 )
+
+[node name="WallBottomTile22" parent="Workshop" instance=ExtResource( 15 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 6 )
+
+[node name="WallTile22" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 2, 6 )
+
+[node name="WallTile29" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 4, 2 )
+
+[node name="WallTile30" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 4, 0 )
+
+[node name="WallTile31" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 4, 4 )
+
+[node name="WallTile32" parent="Workshop" instance=ExtResource( 8 )]
+transform = Transform( 1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 7, 4, 6 )
 
 [node name="WindowTile" parent="Workshop" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27229, 1, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73125, 1, 7 )
+
+[node name="WindowTile15" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 1, 3.802 )
+
+[node name="WindowTile16" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 1, 1.03011 )
 
 [node name="WindowTile2" parent="Workshop" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95653, 1, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62826, 1, 7 )
+
+[node name="WindowTile4" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53416, 1, 7 )
+
+[node name="WindowTile5" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19009, 1.77556, 7 )
 
 [node name="WindowTile3" parent="Workshop" instance=ExtResource( 14 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 1, 1.76395 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 1.86232, -2.91663 )
+
+[node name="WindowTile6" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 1.86232, -5.0303 )
+
+[node name="WindowTile10" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.483402, 1.862, -7 )
+
+[node name="WindowTile12" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.8711, 1.862, -7 )
+
+[node name="WindowTile13" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 1.862, -5.01885 )
+
+[node name="WindowTile14" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 1.862, -2.65327 )
+
+[node name="WindowTile7" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 1.84671, 3.08337 )
+
+[node name="WindowTile9" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 1.84671, 5.27948 )
+
+[node name="WindowTile8" parent="Workshop" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 1.84671, 0.812686 )
 
 [node name="WallSupportTile" parent="Workshop" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 7 )
 
 [node name="WallSupportTile2" parent="Workshop/WallSupportTile" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="WallSupportTile2" parent="Workshop" instance=ExtResource( 16 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 4 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7, 0, 7 )
 
 [node name="WallSupportTile2" parent="Workshop/WallSupportTile2" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile2" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="WallSupportTile5" parent="Workshop" instance=ExtResource( 16 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7, 0, -1 )
+
+[node name="WallSupportTile2" parent="Workshop/WallSupportTile5" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile5" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="WallSupportTile6" parent="Workshop" instance=ExtResource( 16 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 3.2999, 0, -1.17453 )
+
+[node name="WallSupportTile2" parent="Workshop/WallSupportTile6" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile6" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="WallSupportTile7" parent="Workshop" instance=ExtResource( 16 )]
+transform = Transform( -0.708979, 0.00100957, -0.705229, -0.000115728, 0.999999, 0.00154788, 0.70523, 0.00117902, -0.708978, 3.2999, 0, -1.17453 )
+
+[node name="WallSupportTile2" parent="Workshop/WallSupportTile7" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile7" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 2.98023e-08, -2.32831e-10, 1, -1.16415e-10, 0, 3.49246e-10, 1, -0.000231266, 4, 0.00309539 )
+
 [node name="WallSupportTile3" parent="Workshop" instance=ExtResource( 16 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, -4 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, -7 )
 
 [node name="WallSupportTile2" parent="Workshop/WallSupportTile3" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile3" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
 [node name="WallSupportTile4" parent="Workshop" instance=ExtResource( 16 )]
-transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0, -4 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7, 0, -7 )
 
 [node name="WallSupportTile2" parent="Workshop/WallSupportTile4" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="WallSupportTile3" parent="Workshop/WallSupportTile4" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="ChristmasTree" parent="Workshop" instance=ExtResource( 2 )]
+transform = Transform( -0.429991, 0, -0.902833, 0, 1, 0, 0.902833, 0, -0.429991, -5.06794, 1.19209e-07, 5.01713 )
+
+[node name="ChristmasTree2" parent="Workshop" instance=ExtResource( 2 )]
+transform = Transform( -0.429991, 0, -0.902833, 0, 1, 0, 0.902833, 0, -0.429991, 1.52622, 0.75, -5.44969 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31234, 2.76374, -6.88833 )
+mesh = SubResource( 11 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Workshop"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75258, 1.77693, -6.88833 )
+mesh = SubResource( 11 )

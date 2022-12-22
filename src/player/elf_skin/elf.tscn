@@ -18,11 +18,11 @@ shader = ExtResource( 2 )
 shader_param/albedo_texture = ExtResource( 3 )
 
 [sub_resource type="AnimationNodeAnimation" id=25]
-animation = "RESET"
+animation = "jump-loop"
 
 [sub_resource type="AnimationNodeStateMachine" id=9]
 states/RESET/node = SubResource( 25 )
-states/RESET/position = Vector2( 572, 62 )
+states/RESET/position = Vector2( 542, 95 )
 start_node = "RESET"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
@@ -50,7 +50,7 @@ nodes/walk/node = SubResource( 20 )
 nodes/walk/position = Vector2( 360, 80 )
 nodes/walk_run_blend/node = SubResource( 23 )
 nodes/walk_run_blend/position = Vector2( 560, 120 )
-node_connections = [ "walk_run_blend", 0, "walk", "walk_run_blend", 1, "run", "speed", 0, "walk_run_blend", "output", 0, "speed" ]
+node_connections = [ "speed", 0, "walk_run_blend", "output", 0, "speed", "walk_run_blend", 0, "walk", "walk_run_blend", 1, "run" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 advance_condition = "is_walking"

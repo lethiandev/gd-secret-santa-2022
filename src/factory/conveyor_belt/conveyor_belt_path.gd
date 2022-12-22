@@ -2,9 +2,6 @@ extends Path
 
 var offsets = Dictionary()
 
-func _enter_tree() -> void:
-	print("Enter tree conveyor belt")
-
 func add_transport_points_from(p_node: Spatial) -> void:
 	var xform_inv = global_transform.affine_inverse()
 	var transport_points = p_node.get_transport_points()
