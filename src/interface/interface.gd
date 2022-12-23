@@ -9,3 +9,9 @@ func _on_timer_changed(p_seconds: int) -> void:
 
 func _on_presents_changed(p_left: int) -> void:
 	get_node('%Counter').set_counter(p_left)
+
+func hide():
+	$GameStateBar.visible = false
+
+func show():
+	$GameStateBar.visible = true

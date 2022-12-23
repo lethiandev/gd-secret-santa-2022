@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://props/christmas_tree/christmas_tree.tscn" type="PackedScene" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://factory/workshop/wall_bottom_tile.tscn" type="PackedScene" id=15]
 [ext_resource path="res://factory/workshop/wall_support_tile.tscn" type="PackedScene" id=16]
 [ext_resource path="res://factory/conveyor_belt/frame.tscn" type="PackedScene" id=17]
+[ext_resource path="res://stages/sandbox/game_over.gd" type="Script" id=18]
+[ext_resource path="res://interface/themes/holiday.theme.tres" type="Theme" id=19]
 
 [sub_resource type="Curve3D" id=6]
 bake_interval = 0.1
@@ -680,3 +682,49 @@ mesh = SubResource( 11 )
 [node name="MeshInstance2" type="MeshInstance" parent="Workshop"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75258, 1.77693, -6.88833 )
 mesh = SubResource( 11 )
+
+[node name="GameOver" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 19 )
+script = ExtResource( 18 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+custom_constants/separation = 24
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer"]
+margin_top = 116.0
+margin_right = 976.0
+margin_bottom = 253.0
+text = "Thanks for playing!
+"
+align = 1
+
+[node name="RestartButton" type="Button" parent="GameOver/VBoxContainer"]
+margin_left = 372.0
+margin_top = 277.0
+margin_right = 604.0
+margin_bottom = 344.0
+size_flags_horizontal = 4
+text = "Restart Game"
+
+[node name="BackButton" type="Button" parent="GameOver/VBoxContainer"]
+margin_left = 366.0
+margin_top = 368.0
+margin_right = 609.0
+margin_bottom = 435.0
+size_flags_horizontal = 4
+text = "Back to Menu"
+
+[connection signal="pressed" from="GameOver/VBoxContainer/RestartButton" to="GameOver" method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/VBoxContainer/BackButton" to="GameOver" method="_on_back_pressed"]

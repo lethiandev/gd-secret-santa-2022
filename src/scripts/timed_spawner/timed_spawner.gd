@@ -16,7 +16,6 @@ func _on_timer_timeout() -> void:
 		return
 	var spawn_target_node = get_node(spawn_target_path)
 	_spawn_scene_at(PresentScene, spawn_target_node)
-	Gameplay.add_score()
 	spawn_counter -= 1
 
 func _spawn_scene_at(p_scene: PackedScene, p_target: Node) -> void:

@@ -1,6 +1,6 @@
 {
     "asset" : {
-        "generator" : "Khronos glTF Blender I/O v3.3.32",
+        "generator" : "Khronos glTF Blender I/O v3.4.50",
         "version" : "2.0"
     },
     "scene" : 0,
@@ -25,16 +25,15 @@
     ],
     "meshes" : [
         {
-            "name" : "Cube.002",
+            "name" : "Hammer",
             "primitives" : [
                 {
                     "attributes" : {
                         "POSITION" : 0,
-                        "NORMAL" : 1,
-                        "TANGENT" : 2,
-                        "TEXCOORD_0" : 3
+                        "TEXCOORD_0" : 1,
+                        "NORMAL" : 2
                     },
-                    "indices" : 4
+                    "indices" : 3
                 }
             ]
         }
@@ -60,22 +59,16 @@
             "bufferView" : 1,
             "componentType" : 5126,
             "count" : 134,
-            "type" : "VEC3"
+            "type" : "VEC2"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
             "count" : 134,
-            "type" : "VEC4"
+            "type" : "VEC3"
         },
         {
             "bufferView" : 3,
-            "componentType" : 5126,
-            "count" : 134,
-            "type" : "VEC2"
-        },
-        {
-            "bufferView" : 4,
             "componentType" : 5123,
             "count" : 192,
             "type" : "SCALAR"
@@ -90,32 +83,26 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 1608,
+            "byteLength" : 1072,
             "byteOffset" : 1608,
             "target" : 34962
         },
         {
             "buffer" : 0,
-            "byteLength" : 2144,
-            "byteOffset" : 3216,
-            "target" : 34962
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 1072,
-            "byteOffset" : 5360,
+            "byteLength" : 1608,
+            "byteOffset" : 2680,
             "target" : 34962
         },
         {
             "buffer" : 0,
             "byteLength" : 384,
-            "byteOffset" : 6432,
+            "byteOffset" : 4288,
             "target" : 34963
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 6816,
+            "byteLength" : 4672,
             "uri" : "hammer_mesh.bin"
         }
     ]

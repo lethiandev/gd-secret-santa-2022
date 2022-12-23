@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://shaders/palette.png" type="Texture" id=1]
+[ext_resource path="res://shaders/albedo_curve.tres" type="Texture" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode diffuse_toon, specular_disabled;
+
+uniform sampler2D albedo_texture : hint_albedo;
+uniform sampler2D albedo_curve : hint_albedo;
+
+void fragment() {
+	ALBEDO = texture(albedo_texture, UV).rgb;
+	EMISSION = min(vec3(1.0), ALBEDO * 2.0);
+}
+
+void light() {
+	vec3 litness = texture(albedo_curve, vec2(dot(LIGHT, NORMAL), 0.0)).rgb;
+	vec3 diffuse_color = 0.3 * ALBEDO * litness;
+	DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse_color);
+}
+"
+
+[resource]
+render_priority = 1
+shader = SubResource( 1 )
+shader_param/albedo_texture = ExtResource( 1 )
+shader_param/albedo_curve = ExtResource( 3 )

@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Secret Santa 2022"
-run/main_scene="res://stages/sandbox/sandbox_stage.tscn"
+run/main_scene="res://stages/menu/menu_stage.tscn"
 config/icon="res://icon.png"
 
 [autoload]

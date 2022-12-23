@@ -5,6 +5,7 @@ func _physics_process(p_delta: float) -> void:
 	get_parent().set_offset(self, offset - 0.5)
 	if unit_offset >= 1.0:
 		get_parent().remove_offset(self)
+		Gameplay.add_score()
 		queue_free()
 
 func _update_offset(p_end: float) -> void:

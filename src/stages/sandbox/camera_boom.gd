@@ -9,7 +9,7 @@ func _exit_tree() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _input(p_event: InputEvent) -> void:
-	if p_event is InputEventMouseButton:
+	if p_event is InputEventMouseButton and not get_tree().paused:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if p_event is InputEventMouseMotion:
 		var speed = p_event.relative
